@@ -27,6 +27,7 @@ public class DataJpaMealRepositoryImpl implements MealRepository {
         } else if (get(meal.getId(), userId) == null) {
             return null;
         };
+        System.out.println("DATAJPA ---");
         meal.setUser(user);
         return crudMealRepository.save(meal);
     }
@@ -38,11 +39,12 @@ public class DataJpaMealRepositoryImpl implements MealRepository {
 
     @Override
     public Meal get(int id, int userId) {
-        var meal = crudMealRepository.findById(id).orElse(null);
+        /*var meal = crudMealRepository.findById(id).orElse(null);
         if (meal == null || meal.getUser().getId() != userId) {
                 return null;
         }
-        return meal;
+        return meal;*/
+        return crudMealRepository.getByIdAndUserId(id, userId);
     }
 
     @Override
