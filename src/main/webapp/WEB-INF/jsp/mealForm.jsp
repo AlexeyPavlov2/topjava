@@ -3,13 +3,15 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
+<jsp:include page="fragments/headTag.jsp"/>
 <head>
     <title><spring:message code="meal_edit.title"/></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="index.html"><spring:message code="app.home"/></a></h3>
     <h2><spring:message code="${meal.isNew() ? 'meal_edit.operateAdd' : 'meal_edit.operateEdit'}"/></h2>
     <hr>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
@@ -31,5 +33,6 @@
         <button onclick="window.history.back()" type="button"><spring:message code="meal_edit.cancel"/></button>
     </form>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
