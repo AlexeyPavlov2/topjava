@@ -19,4 +19,6 @@ public class TestUtil {
     public static <T> T readFromJson(ResultActions action, Class<T> clazz) throws UnsupportedEncodingException {
         return JsonUtil.readValue(getContent(action), clazz);
     }
+
+
 }
