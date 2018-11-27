@@ -53,11 +53,7 @@ public class MealTestData {
     }
 
     public static ResultMatcher contentJson(Meal expected) {
-        return content().json(writeIgnoreProps(expected, ""));
-    }
-
-    public static ResultMatcher contentJson(Meal... expected) {
-        return content().json(writeIgnoreProps(List.of(expected)));
+        return content().json(writeIgnoreProps(expected));
     }
 
     public static ResultMatcher contentJson(MealTo... expected) {
@@ -65,10 +61,7 @@ public class MealTestData {
     }
 
     public static ResultMatcher contentJson(List<MealTo> expected) {
-        return content().json(writeIgnoreProps(expected));
+        return contentJson(expected.toArray(new MealTo[0]));
     }
-
-
-
 
 }

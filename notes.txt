@@ -1,0 +1,40 @@
+HW07
+
+#1
+
+1) надо чтобы в параметрах вместо
+'@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+LocalDateTime startDateTime'
+можно было написать
+```@RequestParam(value = "startDate", required = false) LocalDate startDate,
+@RequestParam(value = "startTime", required = false) LocalTime startTime```
+т.е как параметры приходят LocalDate / LocalTime , а не String.
+Для того чтобы спринг знал как работать с LocalDate / LocalTime надо сделать свои
+форматтеры /конвертеры и правильно их зарегистрировать в spring- mvc
+если по ссылкам не понятно что делать, то поищи другие примеры +++
+2) " у меня curl не апдейтит с дескрипшн на русском языке"
+а через что тестируешь?
+
+*MealTo*
+- MealTo- это transfer object, он ничего не должен знать о Meal, нельзя использовать
+в конструкторе `MealTo(Meal meal, boolean excess)`.
+Загляни в MealsUtil, там есть подходящий метод +++
+
+*DateTimeUtil*
+- используй константы LocalTime.MAX/MIN +++ для единообразия переопределил свои константы
+
+*MealRestController*
+- produces = MediaType.APPLICATION_JSON_VALUE можно наверх поднять на уровень класса +++
+- `create`  сделай по аналогии `AdminRestController.createWithLocation`
+
+*AbstractControllerTest*
+> 7: @Autowired в тестах нужно делать в том месте, где класс будет использоваться.
+Общий принцип: не размазывать код по классам, объявление переменных
+держать как можно ближе к ее использованию, группировать (не смешивать) код
+с разной функциональностью. +++
+
+*MealTestData*
+- `assertMatchMealTo` как вариант, но можно просто equals переопределить в MealTo - оставил как есть
+- `contentJson(Meal expected)` тут не надо ничего игнорировать +++
+- `contentJson(Meal... expected)` - не используется +++
+- в `contentJson(MealTo... expected)` используй `contentJson(List<MealTo> expected)` +++

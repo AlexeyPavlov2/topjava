@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web.meal;
 
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +17,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@RequestMapping(MealRestController.REST_URL)
+@RequestMapping(value = MealRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class MealRestController extends AbstractMealController {
     static final String REST_URL = "/rest/meals";
 
     @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<MealTo> getAll() {
         return super.getAll();
     }
 
     @Override
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     public Meal get(@PathVariable("id") int id) {
         return super.get(id);
     }
@@ -46,7 +47,7 @@ public class MealRestController extends AbstractMealController {
         super.update(meal, id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Meal> createWithLocation(@RequestBody Meal meal) {
         Meal created = super.create(meal);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -62,7 +63,7 @@ public class MealRestController extends AbstractMealController {
         return super.getBetween(startDateTime.toLocalDate(), startDateTime.toLocalTime(), endDateTime.toLocalDate(), endDateTime.toLocalTime());
     }*/
 
-    @GetMapping(value = "/between", produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@GetMapping(value = "/between")
     public List<MealTo> getBetween(@RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "startTime", required = false) String startTime,
                                    @RequestParam(value = "endDate", required = false) String endDate, @RequestParam(value = "endTime", required = false) String endTime) {
         return super.getBetween(
@@ -70,7 +71,25 @@ public class MealRestController extends AbstractMealController {
                 startTime == null ? DateTimeUtil.MIN_TIME : LocalTime.parse(startTime, DateTimeFormatter.ISO_TIME),
                 endDate == null ? DateTimeUtil.MAX_DATE : LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE),
                 endTime == null ? DateTimeUtil.MAX_TIME : LocalTime.parse(endTime, DateTimeFormatter.ISO_TIME));
+    }*/
+
+    // https://www.petrikainulainen.net/programming/spring-framework/spring-from-the-trenches-using-type-converters-with-spring-mvc/
+    @GetMapping(value = "/between")
+    public List<MealTo> getBetween(@RequestParam(value = "startDate", required = false) LocalDate startDate, @RequestParam(value = "startTime", required = false) LocalTime startTime,
+                                   @RequestParam(value = "endDate", required = false) LocalDate endDate, @RequestParam(value = "endTime", required = false) LocalTime endTime) {
+        return super.getBetween(
+                startDate == null ? DateTimeUtil.MIN_DATE : startDate,
+                startTime == null ? DateTimeUtil.MIN_TIME : startTime,
+                endDate == null ? DateTimeUtil.MAX_DATE : endDate,
+                endTime == null ? DateTimeUtil.MAX_TIME : endTime);
     }
+
+
+
+
+
+
+
 
 
 }
