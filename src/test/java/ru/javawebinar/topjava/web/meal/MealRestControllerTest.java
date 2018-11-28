@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.javawebinar.topjava.MealTestData;
+import ru.javawebinar.topjava.TestUtil;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
@@ -46,7 +47,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MealTestData.contentJson(MealsUtil.getWithExcess(MealTestData.MEALS, UserTestData.USER.getCaloriesPerDay())));
+                .andExpect(TestUtil.contentJson(MealsUtil.getWithExcess(MealTestData.MEALS, UserTestData.USER.getCaloriesPerDay())));
 
     }
 
@@ -56,7 +57,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(MealTestData.MEAL1));
+                .andExpect(TestUtil.contentJson(MealTestData.MEAL1));
     }
 
     @Test
@@ -65,7 +66,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(
+                .andExpect(TestUtil.contentJsonArray(
                         MealsUtil.createWithExcess(MEAL2, false),
                         MealsUtil.createWithExcess(MEAL1, false)));
     }

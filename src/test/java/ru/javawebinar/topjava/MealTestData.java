@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava;
 
-import org.springframework.test.web.servlet.ResultMatcher;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealTo;
 
@@ -9,9 +8,7 @@ import java.util.List;
 
 import static java.time.LocalDateTime.of;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
-import static ru.javawebinar.topjava.web.json.JsonUtil.writeIgnoreProps;
 
 public class MealTestData {
     public static final int MEAL1_ID = START_SEQ + 2;
@@ -50,18 +47,6 @@ public class MealTestData {
 
     public static void assertMatchMealTo(List<MealTo> actual, List<MealTo> expected) {
         assertThat(actual).usingFieldByFieldElementComparator().isEqualTo(expected);
-    }
-
-    public static ResultMatcher contentJson(Meal expected) {
-        return content().json(writeIgnoreProps(expected));
-    }
-
-    public static ResultMatcher contentJson(MealTo... expected) {
-        return content().json(writeIgnoreProps(List.of(expected)));
-    }
-
-    public static ResultMatcher contentJson(List<MealTo> expected) {
-        return contentJson(expected.toArray(new MealTo[0]));
     }
 
 }

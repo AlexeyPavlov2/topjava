@@ -1,7 +1,6 @@
 HW07
 
 #1
-
 1) надо чтобы в параметрах вместо
 '@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 LocalDateTime startDateTime'
@@ -38,3 +37,13 @@ LocalDateTime startDateTime'
 - `contentJson(Meal expected)` тут не надо ничего игнорировать +++
 - `contentJson(Meal... expected)` - не используется +++
 - в `contentJson(MealTo... expected)` используй `contentJson(List<MealTo> expected)` +++
+
+#2
+*MealRestController*
+- getBetween, в AbstractMealController уже есть
+обработка нул данных, не дублируй +++
+
+*MealTestData*
+- в твоем случае достаточно двух дженерик методов contentJson, для одного объекта и
+varargs (надо перенести в TestUtil) с использованием writeValue вместо writeIgnoreProps +++
+
