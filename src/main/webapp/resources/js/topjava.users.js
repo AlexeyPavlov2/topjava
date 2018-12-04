@@ -1,6 +1,10 @@
 const ajaxUrl = "ajax/admin/users/";
 let datatableApi;
 
+function updateTable() {
+    $.get(ajaxUrl, fillTable());
+}
+
 // $(document).ready(function () {
 $(function () {
     datatableApi = $("#datatable").DataTable({
@@ -23,12 +27,14 @@ $(function () {
                 "data": "registered"
             },
             {
-                "defaultContent": "Edit",
-                "orderable": false
+                "defaultContent": "",
+                "orderable": false,
+                "render": showEditCol
             },
             {
-                "defaultContent": "Delete",
-                "orderable": false
+                "defaultContent": "",
+                "orderable": false,
+                "render": showDeleteCol
             }
         ],
         "order": [
@@ -40,3 +46,17 @@ $(function () {
     });
     makeEditable();
 });
+
+function setUserStatus(checkbox, id) {
+    let enabledStatus = checkbox.is(':checked');
+    //alert(enabledStatus + " " + id);
+    $.ajax({
+        url: ajaxUrl + id,
+        type: "POST",
+        data: 'status=' + enabledStatus
+    }).done(function () {
+        successNoty("Status changed to " + enabledStatus);
+    }).fail(function () {
+        successNoty("Request failed");
+    });
+}
