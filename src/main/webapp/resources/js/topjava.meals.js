@@ -88,7 +88,7 @@ $(function () {
     );
 
     //$("#startDate").datetimepicker('reset');
-    $('#input').datetimepicker('show');
+    $('#startDate').datetimepicker('show');
 
 
 });
