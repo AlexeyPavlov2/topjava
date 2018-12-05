@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@RestController
+/*@RestController*/
 @RequestMapping(value = MealRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class MealRestController extends AbstractMealController {
     static final String REST_URL = "/rest/profile/meals";
