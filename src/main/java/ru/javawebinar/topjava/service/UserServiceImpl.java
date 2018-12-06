@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable("users")
     @Transactional
     public void setStatus(int id, boolean status) {
         User user = get(id);

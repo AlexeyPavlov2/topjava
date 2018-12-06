@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,7 @@ public class AdminAjaxController extends AbstractUserController {
                                @RequestParam("password") String password) {
 
         User user = new User(id, name, email, password, Role.ROLE_USER);
+        user.setRegistered(new Date());
         if (user.isNew()) {
             super.create(user);
         }

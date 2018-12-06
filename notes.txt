@@ -1,0 +1,21 @@
+HW08
+
+#1
+с datetimepicker будем на след уроке разбираться
+нужна библиотека jquery.datetimepicker.full.min.js +++
+
+*topjava.meals.js*
+- datatableApi изначально заполняется без фильтра, просто getAll
+- fillTable дублируешь с topjava.common.js +++
+
+*topjava.users.js*
+- используй fillTable +++
+
+*meals.jsp*
+- добавление нового, ошибка 400 (или время с Т надо передавать) +++
+
+*UserServiceImpl*
+- добавь кеширование в setStatus +++
+
+*AbstractUserController*
+- добавь логирование в setStatus +++

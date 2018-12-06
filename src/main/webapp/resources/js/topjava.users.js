@@ -30,7 +30,7 @@ function setUserStatus(checkbox, id) {
 
 function updateTable() {
     $.get(ajaxUrl, function (data) {
-        datatableApi.clear().rows.add(data).draw();
+        fillTable(data);
     });
 }
 

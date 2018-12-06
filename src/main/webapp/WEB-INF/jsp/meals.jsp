@@ -19,6 +19,7 @@
                         <div class="offset-1 col-2">
                             <label for="startDate"><spring:message code="meal.startDate"/></label>
                             <input class="form-control" name="startDate" id="startDate">
+                            <br><br><br>
                         </div>
                         <div class="col-2">
                             <label for="endDate"><spring:message code="meal.endDate"/></label>

@@ -7,9 +7,9 @@ function clearMealFilter() {
 }
 
 
-function fillTable(data) {
+/*function fillTable(data) {
     datatableApi.clear().rows.add(data).draw();
-}
+}*/
 
 function updateTable() {
     $.ajax({
@@ -20,7 +20,6 @@ function updateTable() {
         .done(fillTable);
     console.log("update");
 }
-
 
 $(function () {
     datatableApi = $("#datatable").DataTable({
@@ -73,22 +72,49 @@ $(function () {
     $("#startDate").datetimepicker(
         {
             timepicker: false,
-            datepicker: true,
-            format: 'Y-m-d H:i',
-            formatTime: 'H:i',
-            formatDate: 'Y-m-d',
-            startDate:new Date(),
+            format: 'Y-m-d',
             todayButton: true,
-
-            /*console - ???
-﻿jquery.datetimepicker.js:1760 Uncaught TypeError: Cannot read property 'formatDate' of null*/
             closeOnDateSelect: true,
-            todayButton: true
-        }
-    );
+            withoutCopyright: true,
+            DayOfWeekStart: 1
 
-    //$("#startDate").datetimepicker('reset');
-    $('#startDate').datetimepicker('show');
+        });
+
+    $("#endDate").datetimepicker(
+        {
+            timepicker: false,
+            format: 'Y-m-d',
+            todayButton: true,
+            closeOnDateSelect: true,
+            withoutCopyright: true,
+            DayOfWeekStart: 1
+
+        });
+
+    $("#startTime").datetimepicker(
+        {
+            datepicker: false,
+            format: 'H:i',
+            closeOnDateSelect: true,
+            withoutCopyright: true,
+        });
+
+    $("#endTime").datetimepicker(
+        {
+            datepicker: false,
+            format: 'H:i',
+            closeOnDateSelect: true,
+            withoutCopyright: true,
+        });
+
+    $("#dateTime").datetimepicker({
+        format: 'Y-m-d H:i',
+        todayButton: true,
+        closeOnDateSelect: true,
+        withoutCopyright: true,
+        DayOfWeekStart: 1
+    });
+
 
 
 });

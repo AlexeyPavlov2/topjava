@@ -32,7 +32,12 @@ function fillTable(data) {
 
 function save() {
     let form = $("#detailsForm");
-    alert(form.serialize());
+    if (form.find("#dateTime").get().length > 0) {
+        let input = form.find("#dateTime");
+        let value =  input.val();
+        input.val(value.replace(" ", "T"));
+    }
+
     $.ajax({
         type: "POST",
         url: ajaxUrl,
@@ -76,16 +81,11 @@ function showDeleteCol(data, type, row) {
 }
 
 function showDateTime(data, type, row) {
-    //alert(data);
-
-
     let dtFormatted = data.replace("T", " ");
-    //alert(dtFormatted);
     if (dtFormatted.indexOf(".") > -1) {
         dtFormatted = dtFormatted.substr(0, dtFormatted.indexOf("."));
     }
     return dtFormatted;
-
 }
 
 function failNoty(jqXHR) {

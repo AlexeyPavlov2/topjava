@@ -50,6 +50,7 @@ public abstract class AbstractUserController {
     }
 
     public void setStatus(int id, boolean status) {
+        log.info("setStatus with id={}, value={} ", id, status);
         service.setStatus(id, status);
     };
 }
