@@ -17,6 +17,8 @@ function enable(chkbox, id) {
 
 // $(document).ready(function () {
 $(function () {
+    // TODO дебаггер не работает
+    debugger;
     makeEditable({
             ajaxUrl: userAjaxUrl,
             datatableApi: $("#datatable").DataTable({
@@ -26,6 +28,8 @@ $(function () {
                 },
                 "paging": false,
                 "info": true,
+                "searching": true,
+                "language":  dataTableLanguageData,
                 "columns": [
                     {
                         "data": "name"

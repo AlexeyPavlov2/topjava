@@ -1,7 +1,9 @@
+const mealAjaxUrl = "ajax/profile/meals/";
+
 function updateFilteredTable() {
     $.ajax({
         type: "GET",
-        url: "ajax/profile/meals/filter",
+        url: mealAjaxUrl + "filter",
         data: $("#filter").serialize()
     }).done(updateTableByData);
 }
@@ -13,13 +15,20 @@ function clearFilter() {
 
 $(function () {
     makeEditable({
-        ajaxUrl: "ajax/profile/meals/",
+        ajaxUrl: mealAjaxUrl,
         datatableApi: $("#datatable").DataTable({
+            "ajax": {
+                "url": mealAjaxUrl,
+                "dataSrc": ""
+            },
             "paging": false,
             "info": true,
+            "searching": true,
+            "language":  dataTableLanguageData,
             "columns": [
                 {
-                    "data": "dateTime"
+                    "data": "dateTime",
+                    "render": showDateTime
                 },
                 {
                     "data": "description"
@@ -28,14 +37,19 @@ $(function () {
                     "data": "calories"
                 },
                 {
-                    "defaultContent": "Edit",
-                    "orderable": false
+                    "orderable": false,
+                    "defaultContent": "",
+                    "render": renderEditBtn
                 },
                 {
-                    "defaultContent": "Delete",
-                    "orderable": false
+                    "orderable": false,
+                    "defaultContent": "",
+                    "render": renderDeleteBtn
                 }
             ],
+            "createdRow": function (row, data, dataIndex) {
+                $(row).attr("data-mealExcess", data.excess);
+            },
             "order": [
                 [
                     0,
@@ -45,4 +59,56 @@ $(function () {
         }),
         updateTable: updateFilteredTable
     });
+
+    $.datetimepicker.setLocale("ru");
+    $("#startDate").datetimepicker(
+        {
+            timepicker: false,
+            format: 'Y-m-d',
+            todayButton: true,
+            closeOnDateSelect: true,
+            withoutCopyright: true,
+            DayOfWeekStart: 1
+
+        });
+
+    $("#endDate").datetimepicker(
+        {
+            timepicker: false,
+            format: 'Y-m-d',
+            todayButton: true,
+            closeOnDateSelect: true,
+            withoutCopyright: true,
+            DayOfWeekStart: 1
+
+        });
+
+    $("#startTime").datetimepicker(
+        {
+            datepicker: false,
+            format: 'H:i',
+            closeOnDateSelect: true,
+            withoutCopyright: true,
+        });
+
+    $("#endTime").datetimepicker(
+        {
+            datepicker: false,
+            format: 'H:i',
+            closeOnDateSelect: true,
+            withoutCopyright: true,
+        });
+
+    $("#dateTime").datetimepicker({
+        format: 'Y-m-d H:i',
+        todayButton: true,
+        closeOnDateSelect: true,
+        withoutCopyright: true,
+        DayOfWeekStart: 1
+    });
+
+
+
+
+
 });
