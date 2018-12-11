@@ -4,9 +4,7 @@
 
 <script type="text/javascript">
     var i18n = [];
-
     //https://beginnersbook.com/2013/12/jsp-include-with-parameter-example/
-
     i18n["addTitle"] = '<spring:message code="${param.target}.add"/>';
     i18n["editTitle"] = '<spring:message code="${param.target}.edit"/>';
     <c:forEach var='key' items='<%=new String[]{"common.deleted", "common.saved", "common.enabled", "common.disabled", "common.errorStatus"}%>'>

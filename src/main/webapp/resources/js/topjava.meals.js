@@ -1,5 +1,7 @@
 const mealAjaxUrl = "ajax/profile/meals/";
 
+
+
 function updateFilteredTable() {
     $.ajax({
         type: "GET",
@@ -27,8 +29,8 @@ $(function () {
             "language":  dataTableLanguageData,
             "columns": [
                 {
-                    "data": "dateTime",
-                    "render": showDateTime
+                    "data": "dateTime"/*,
+                    "render": showDateTime*/
                 },
                 {
                     "data": "description"

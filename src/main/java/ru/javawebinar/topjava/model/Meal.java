@@ -42,7 +42,8 @@ public class Meal extends AbstractBaseEntity {
     @Column(name = "calories", nullable = false)
     @Range(min = 10, max = 5000)
     @NotNull
-    private int calories;
+    private Integer calories;
+    // https://topjava15.slack.com/archives/CELFK1DRA/p1544474426043300?thread_ts=1544473528.040700&cid=CELFK1DRA
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -92,7 +93,7 @@ public class Meal extends AbstractBaseEntity {
         this.description = description;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(Integer calories) {
         this.calories = calories;
     }
 

@@ -1,5 +1,35 @@
 let context, form;
 
+/*//https://stackoverflow.com/questions/27707787/get-ajax-request-url-in-ajaxsetup-converters-for-logging-purposes
+$(document).ajaxError(function(e, xhr, settings, err) {
+    var message = 'url: ' + settings.url + ' ' + err.message;
+    // push message as part of an error to custom error reporting
+    alert(message);
+});*/
+
+//https://stackoverflow.com/questions/27707787/get-ajax-request-url-in-ajaxsetup-converters-for-logging-purposes
+$.ajaxSetup({
+    converters: {"text json": function(json_string)  {
+            var json = JSON.parse(json_string);
+            $(json).each(function () {
+                //console.log(this);
+                if (this.hasOwnProperty("dateTime")) {
+                    this.dateTime = this.dateTime.replace("T", " ").substr(0, 16);
+                }
+                if (this.hasOwnProperty("registered")) {
+                    this.registered = this.registered.replace("T", " ").substr(0, 16);
+                }
+
+
+
+                return this;
+            });
+            return json;
+        }
+    }
+});
+
+
 function makeEditable(ctx) {
     context = ctx;
     form = $('#detailsForm');
@@ -58,6 +88,8 @@ function save() {
         context.updateTable();
         successNoty("common.saved");
     });
+
+
 }
 
 let failedNote;

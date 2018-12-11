@@ -17,8 +17,6 @@ function enable(chkbox, id) {
 
 // $(document).ready(function () {
 $(function () {
-    // TODO дебаггер не работает
-    debugger;
     makeEditable({
             ajaxUrl: userAjaxUrl,
             datatableApi: $("#datatable").DataTable({
@@ -56,13 +54,13 @@ $(function () {
                         }
                     },
                     {
-                        "data": "registered",
+                        "data": "registered"/*,
                         "render": function (date, type, row) {
                             if (type === "display") {
                                 return date.substring(0, 10);
                             }
                             return date;
-                        }
+                        }*/
                     },
                     {
                         "orderable": false,
