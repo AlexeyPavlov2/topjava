@@ -1,6 +1,17 @@
 const mealAjaxUrl = "ajax/profile/meals/";
 
-
+//https://stackoverflow.com/questions/27707787/get-ajax-request-url-in-ajaxsetup-converters-for-logging-purposes
+$.ajaxSetup({
+    converters: {"text json": function(json_string)  {
+            var json = JSON.parse(json_string);
+            $(json).each(function () {
+                    this.dateTime = this.dateTime.replace("T", " ").substr(0, 16);
+                return this;
+            });
+            return json;
+        }
+    }
+});
 
 function updateFilteredTable() {
     $.ajax({
@@ -29,8 +40,7 @@ $(function () {
             "language":  dataTableLanguageData,
             "columns": [
                 {
-                    "data": "dateTime"/*,
-                    "render": showDateTime*/
+                    "data": "dateTime"
                 },
                 {
                     "data": "description"
@@ -63,7 +73,7 @@ $(function () {
     });
 
     $.datetimepicker.setLocale("ru");
-    $("#startDate").datetimepicker(
+    $("#startDate, #endDate").datetimepicker(
         {
             timepicker: false,
             format: 'Y-m-d',
@@ -74,26 +84,7 @@ $(function () {
 
         });
 
-    $("#endDate").datetimepicker(
-        {
-            timepicker: false,
-            format: 'Y-m-d',
-            todayButton: true,
-            closeOnDateSelect: true,
-            withoutCopyright: true,
-            DayOfWeekStart: 1
-
-        });
-
-    $("#startTime").datetimepicker(
-        {
-            datepicker: false,
-            format: 'H:i',
-            closeOnDateSelect: true,
-            withoutCopyright: true,
-        });
-
-    $("#endTime").datetimepicker(
+    $("#startTime, #endTime").datetimepicker(
         {
             datepicker: false,
             format: 'H:i',

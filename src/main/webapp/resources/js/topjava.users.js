@@ -1,5 +1,16 @@
 const userAjaxUrl = "ajax/admin/users/";
 
+$.ajaxSetup({
+    converters: {"text json": function(json_string)  {
+            var json = JSON.parse(json_string);
+            $(json).each(function () {
+                    this.registered = this.registered.replace("T", " ").substr(0, 10);
+                return this;
+            });
+            return json;
+        }
+    }
+});
 function enable(chkbox, id) {
     const enabled = chkbox.is(":checked");
 //  https://stackoverflow.com/a/22213543/548473
@@ -54,13 +65,7 @@ $(function () {
                         }
                     },
                     {
-                        "data": "registered"/*,
-                        "render": function (date, type, row) {
-                            if (type === "display") {
-                                return date.substring(0, 10);
-                            }
-                            return date;
-                        }*/
+                        "data": "registered"
                     },
                     {
                         "orderable": false,
