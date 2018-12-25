@@ -14,7 +14,7 @@ function makeEditable(ctx) {
                 "info": true,
                 "language": {
                     "search": i18n["common.search"],
-                    "info":i18n["common.show"]
+                    "info":i18n["common.info"]
                 }
             }
         ));
